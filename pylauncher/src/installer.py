@@ -79,10 +79,16 @@ def addgose(): #add goose to registry and start menu and...
       cut.Targetpath=os.path.join(goosepath,cutpath)
       cut.save()
 
-
+   #adding goose to startup
+   with winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER,runreg) as rreg:
+      winreg.SetValueEx(rreg,'DesktopGoose',0,winreg.REG_SZ,goosereg.get('DisplayIcon'))
    
-
-
+def finalinfo():
+   print(Style.RESET_ALL+Fore.LIGHTGREEN_EX+'\n\n\n'+
+   '        goose\'s got installed in your computer. now I\'ll open a page that will help you'+
+   '        press enter...')
+   input()
+   quit()
 
 
 
@@ -92,25 +98,24 @@ startmenupath=r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DesktopGoos
 gooseurl='https://github.com/tsalehm/DesktopGoose/archive/refs/heads/main.zip'
 goosepath=os.path.expandvars(r'%appdata%\DesktopGoose-main')
 softreg=r'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\DesktopGoose'
+runreg='SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
 goosereg={
    'DisplayName':'DesktopGoose',
    'DisplayVersion':'0.3',
    'UninstallString':os.path.join(goosepath,'uninstall.exe'),
    'InstallLocation':goosepath,
    'Publisher':'tsalehm',
-   'DisplayIcon':os.path.join(goosepath,'DesktopGoose.exe.exe'),
+   'DisplayIcon':os.path.join(goosepath,'DesktopGoose.exe'),
    'URLInfoAbout':'https://github.com/tsalehm/DesktopGoose',
 }
 goosecut=['DesktopGoose.exe','about goose.txt','uninstall.exe']
+startupath=os.path.expandvars(r'%appdata%\Microsoft\Windows\Start Menu\Programs\Startup')
 
 #start
-showgoose()
+showgoose();
 print_info()
 downgoose()
 addgose()
-print(input("poo"))
-
-time.sleep(696969)
-
+finalinfo()
 
 
