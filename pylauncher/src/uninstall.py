@@ -1,17 +1,22 @@
+import os
 import winreg
-import subprocess
+import climage
 from shutil import rmtree
 from colorama import init, Fore
+from subprocess import DEVNULL, call
 from installer import resource_path, runreg, startmenupath, goosepath
 
 
 # info
-init()
 softreg = r'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
 
 
 # you sure?
-print(Fore.LIGHTRED_EX + "\n\n\n\n\n\n\n      Hoooooonk! why do you want to uninstall the goose :_(\n\n\n"
+os.system("")
+print('\n')
+print(climage.convert(resource_path("angrygoose.png"), is_unicode=True))
+init()
+print(Fore.LIGHTRED_EX + "\n\n      Hoooooonk! why do you want to uninstall the goose :_(\n\n\n"
       + Fore.MAGENTA + "      1)i'm an idiot\n      2)i'm an idiot\n      3)OK i'll keep the goose")
 
 idiot = input()
@@ -22,7 +27,7 @@ else:
    print(Fore.LIGHTRED_EX + "\n\n      so you're not an idiot..."
          + "\n      goodbye, asswhore...")
 
-subprocess.call(resource_path('closegoose.bat'), stdout=subprocess.DEVNULL)  # closw goose
+call(resource_path('closegoose.bat'), shell=False, stdout=DEVNULL, stderr=DEVNULL)  # close goose
 
 
 # remove goose
@@ -41,4 +46,4 @@ try:
 except:
    pass
 
-input(Fore.GREEN + "\n\n      the goose's got rid of you\n      press something and make me get rid of you too")
+input(Fore.GREEN + "\n\n      the goose's got rid of you\n      press enter and make me get rid of you too")

@@ -97,13 +97,13 @@ def main():
    # ask the user about installing goose
    if getin() is False:
       print(Fore.RED + Style.BRIGHT + "\n            are you sure you don't want the goose?"
-            + " you should give it a try [y:bye/n:ok] :")
+            + "            you should give it a try [y:bye/n:ok] :")
       if getin() is True:
          print("\n\n            hoooonks !")
          sleep(4)
          quit()
 
-   print(Style.RESET_ALL + Fore.LIGHTGREEN_EX + "\n\n        OK, let me download the goose")
+   print(Style.RESET_ALL + Fore.LIGHTGREEN_EX + "\n\n         OK, let me download the goose")
 
    while True:
       try:
@@ -114,7 +114,7 @@ def main():
                + '\n         and make sure you can connect to \"github.com\" ')
          print('         do yo want to try again?[y/n] :')
          if getin() is False:
-            print('\n\nsee you soon!'); sleep(3); quit()
+            print('\n\n         see you soon!'); sleep(3); quit()
 
    # adding goose to registry and control panel
    with winreg.CreateKeyEx(winreg.HKEY_CURRENT_USER, softreg) as gkey:
@@ -127,7 +127,7 @@ def main():
       os.mkdir(startmenupath)
    for cutpath in goosecut:
       cut = Dispatch('WScript.Shell').CreateShortCut(os.path.join(
-         startmenupath , re.split(r'\.', cutpath)[0] + '.lnk'))
+         startmenupath, re.split(r'\.', cutpath)[0] + '.lnk'))
       cut.Targetpath = os.path.join(goosepath, cutpath)
       cut.save()
 

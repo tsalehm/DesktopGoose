@@ -23,6 +23,7 @@ a = Analysis(
 )
 
 a.datas += [('closegoose.bat', folderpath+'files\\closegoose.bat',  'DATA')]
+a.datas += [('angrygoose.png', folderpath+'files\\angrygoose.png',  'DATA')]
 
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)

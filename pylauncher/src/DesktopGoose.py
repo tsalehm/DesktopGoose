@@ -14,7 +14,8 @@ from installer import resource_path, goosepath
 
 # info
 versionpath = os.path.expandvars(r'%appdata%\DesktopGoose\pylauncher\files\version.txt')
-thegoosepath=os.path.join(goosepath,'GooseDesktop.exe')
+thegoosepath = os.path.join(goosepath, 'GooseDesktop.exe')
+
 
 # functions
 def check_for_updates():
