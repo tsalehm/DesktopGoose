@@ -3,10 +3,11 @@
 
 block_cipher = None
 
+folderpath="C:\\Users\\saleh\\Desktop\\DesktopGoose\\pylauncher\\"
 
 a = Analysis(
-    ['F:\\Downloads\\Programs\\DesktopGoose v0.3\\pylauncher\\src\\installer.py'],
-    pathex=["F:\\Downloads\\Programs\\DesktopGoose v0.3\\pylauncher\\src"],
+    [folderpath+'src\\installer.py'],
+    pathex=[folderpath+"src"],
     binaries=[],
     datas=[],
     hiddenimports=[],
@@ -20,8 +21,8 @@ a = Analysis(
     noarchive=False,
 )
 
-a.datas += [('gooseicon.png', 'F:\\Downloads\\Programs\\DesktopGoose v0.3\\pylauncher\\files\\gooseicon.png',  'DATA')]
-a.datas += [('closegoose.bat', 'F:\\Downloads\\Programs\\DesktopGoose v0.3\\pylauncher\\files\\closegoose.bat',  'DATA')]
+a.datas += [('gooseicon.png', folderpath+'files\\gooseicon.png',  'DATA')]
+a.datas += [('closegoose.bat', folderpath+'files\\closegoose.bat',  'DATA')]
 
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
@@ -46,6 +47,6 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='F:\\Downloads\\Programs\\DesktopGoose v0.3\\pylauncher\\files\\gooseicon.png',
+    icon=folderpath+'files\\gooseicon.png',
     uac_admin=True,
 )

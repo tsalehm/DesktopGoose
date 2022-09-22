@@ -35,6 +35,7 @@ goosecut = ['DesktopGoose.exe', 'about goose.html', 'uninstall.exe']
 # functions
 def resource_path(relative_path):  # get gooseicon.png path in exe file (pyinstaller)
 
+   # return os.path.join(os.getcwd(), relative_path)
    try:
       base_path = sys._MEIPASS
    except Exception:
@@ -125,8 +126,8 @@ def main():
    if not os.path.exists(startmenupath):
       os.mkdir(startmenupath)
    for cutpath in goosecut:
-      cut = Dispatch('WScript.Shell').CreateShortCut(
-         startmenupath + re.split(r'\.', cutpath)[0] + 'lnk')
+      cut = Dispatch('WScript.Shell').CreateShortCut(os.path.join(
+         startmenupath , re.split(r'\.', cutpath)[0] + '.lnk'))
       cut.Targetpath = os.path.join(goosepath, cutpath)
       cut.save()
 
