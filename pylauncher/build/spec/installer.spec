@@ -3,7 +3,8 @@
 
 block_cipher = None
 
-folderpath="C:\\Users\\saleh\\Desktop\\DesktopGoose\\pylauncher\\"
+folderpath="F:\\Downloads\\Programs\\DesktopGoose v0.3\\pylauncher\\"
+
 
 a = Analysis(
     [folderpath+'src\\installer.py'],
