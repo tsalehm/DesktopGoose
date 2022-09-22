@@ -9,18 +9,18 @@ import subprocess
 from github import Github
 from keyboard import press
 from packaging import version
-from installer import resource_path, goosepath as thegoosepath
+from installer import resource_path, goosepath
 
 
 # info
-versionpath = r'%appdata%\DesktopGoose\pylauncher\files\version.txt'
-
+versionpath = os.path.expandvars(r'%appdata%\DesktopGoose\pylauncher\files\version.txt')
+thegoosepath=os.path.join(goosepath,'GooseDesktop.exe')
 
 # functions
 def check_for_updates():
 
    rpo = Github().get_repo('tsalehm/DesktopGoose')
-   with open(os.path.expandvars(versionpath)) as vrs:
+   with open() as vrs:
       thevrs = vrs.readline()
    if version.parse(rpo.get_latest_release().tag_name()) > version.parse(thevrs): return True
    return False
@@ -71,11 +71,10 @@ def opengoose():  # open goose and find its hwnd
 # main
 try:
    if check_for_updates(): do_the_update()
-except Exception:
+except:
    pass
 
 opengoose()
-
 
 # look for goose's memes and pin them untill the app gets closed
 while True:
