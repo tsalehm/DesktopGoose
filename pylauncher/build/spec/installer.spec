@@ -24,6 +24,7 @@ a = Analysis(
 
 a.datas += [('gooseicon.png', folderpath+'files\\gooseicon.png',  'DATA')]
 a.datas += [('closegoose.bat', folderpath+'files\\closegoose.bat',  'DATA')]
+a.datas += [('opengoose.bat', folderpath+'files\\opengoose.bat',  'DATA')]
 
 
 pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
