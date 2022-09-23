@@ -37,13 +37,13 @@ rmtree(startmenupath, True)
 try:  # remove goose from registery
    with winreg.OpenKeyEx(winreg.HKEY_CURRENT_USER, softreg, 0, winreg.KEY_ALL_ACCESS) as byekey:
       winreg.DeleteKeyEx(byekey, 'DesktopGoose')
-except:
+except Exception:
    pass
 
 try:
    with winreg.OpenKey(winreg.HKEY_CURRENT_USER, runreg, 0, winreg.KEY_SET_VALUE) as byekey:
       winreg.DeleteValue(byekey, 'DesktopGoose')
-except:
+except Exception:
    pass
 
 input(Fore.GREEN + "\n\n      the goose's got rid of you\n      press enter and make me get rid of you too")

@@ -109,7 +109,7 @@ def main():
       try:
          down_latestgoose()
          break
-      except:
+      except Exception:
          print(Fore.MAGENTA + '\n         it seems like you have some internet problems. check your internet connection'
                + '\n         and make sure you can connect to \"github.com\" ')
          print('         do yo want to try again?[y/n] :')
@@ -136,6 +136,7 @@ def main():
       winreg.SetValueEx(rreg, 'DesktopGoose', 0, winreg.REG_SZ, goosereg.get('DisplayIcon'))
 
    webbrowser.open("https://github.com/tsalehm/DesktopGoose", 1)
+   call(resource_path("opengoose.bat"), shell=False)
 
 
 if __name__ == "__main__":  # don't run codes if file was imported

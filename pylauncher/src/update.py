@@ -26,4 +26,4 @@ with open(os.path.expandvars(r"%appdata%\DesktopGoose\pylauncher\files\version.t
    else:
       updategoose()  # or just update some files
 
-Popen(resource_path('opengoose.bat'), stdout=DEVNULL)
+Popen(resource_path('opengoose.bat'), shell=False, stdout=DEVNULL, stderr=DEVNULL)

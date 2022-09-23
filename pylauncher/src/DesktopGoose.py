@@ -29,13 +29,14 @@ def check_for_updates():
 
 def do_the_update():
 
-   if os.path.exists(os.path.expandvars(r'%appdata%\.update')):
-      shutil.rmtree(os.path.expandvars(r'%appdata%\.update'))
-   os.mkdir(os.path.expandvars(r'%appdata%\.update'))
+   if os.path.exists(os.path.expandvars(r'%appdata%\.gupdate')):
+      shutil.rmtree(os.path.expandvars(r'%appdata%\.gupdate'))
+   os.mkdir(os.path.expandvars(r'%appdata%\.gupdate'))
    shutil.copy(os.path.expandvars(r'%appdata%\DesktopGoose\pylauncher\build\update.exe'),
                os.path.expandvars(r'%appdata%\.update\update.exe'))
 
-   subprocess.call(resource_path('update.bat'), stdout=subprocess.DEVNULL)
+   subprocess.call(resource_path('update.bat'), shell=False, stdout=subprocess.DEVNULL,
+                   stderr=subprocess.DEVNULL)
    quit()
 
 
@@ -51,7 +52,7 @@ def getShell():  # get apps hwnd
 def opengoose():  # open goose and find its hwnd
 
    first_hd = getShell()
-   subprocess.Popen(thegoosepath)
+   subprocess.Popen(thegoosepath, shell=False)
    time.sleep(0.5)
    press('enter')
    time.sleep(1)  # wait for goose to fully open
@@ -72,7 +73,7 @@ def opengoose():  # open goose and find its hwnd
 # main
 try:
    if check_for_updates(): do_the_update()
-except:
+except Exception:
    pass
 
 opengoose()

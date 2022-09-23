@@ -1,2 +1,2 @@
-cd /d %appdata%/.update
+cd /d %appdata%/.gupdate
 start update.exe
