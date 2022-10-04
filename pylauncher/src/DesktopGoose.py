@@ -1,6 +1,6 @@
 import re
 import os
-import time
+import sys
 import pyvda
 import psutil
 import shutil
@@ -8,6 +8,7 @@ import win32gui
 import subprocess
 from github import Github
 from keyboard import press
+from time import sleep, time
 from packaging import version
 from installer import resource_path, goosepath
 
@@ -37,7 +38,7 @@ def do_the_update():
 
    subprocess.call(resource_path('update.bat'), shell=False, stdout=subprocess.DEVNULL,
                    stderr=subprocess.DEVNULL)
-   quit()
+   sys.exit()
 
 
 def getShell():  # get apps hwnd
@@ -50,18 +51,28 @@ def getShell():  # get apps hwnd
 
 
 def opengoose():  # open goose and find its hwnd
-
    first_hd = getShell()
    subprocess.Popen(thegoosepath, shell=False)
-   time.sleep(0.5)
+   f_time = time()
+   sleep(0.5)
+   while 'pinobj' not in locals() and time() - f_time <= 20:
+      modshell = getShell()
+      for mod in modshell:
+         if re.search("Mod Enabler Warning", win32gui.GetWindowText(mod)):
+            try:
+               pinobj = pyvda.AppView(hwnd=mod)
+               pinobj.switch_to()
+               pinobj.set_focus()
+               pinobj.pin()
+            except Exception:
+               pass
    press('enter')
-   time.sleep(1)  # wait for goose to fully open
+   sleep(1)  # wait for goose to fully open
    sec_hd = getShell()
    dif_hd = [element for element in sec_hd if element not in first_hd]
 
 # pin goose to all desktops
    for honk in dif_hd:
-
       try:
          if win32gui.GetWindowText(honk) == '':  # goose's main process is named ''
             tsk = pyvda.AppView(hwnd=honk)
@@ -83,14 +94,14 @@ while True:
    memeshell = getShell()
    for meme in memeshell:
 
-      if re.search(r"Goose|^$", win32gui.GetWindowText(meme)) and meme > 0:
-         # memes are names with 'Goose not-epad' and ''
+      if re.search("Goose \"Not-epad\"|^$", win32gui.GetWindowText(meme)) and meme > 0:
+         # memes are names with 'Goose "Not-epad"' and ''
          try:
             memeobj = pyvda.AppView(hwnd=meme)
             if not memeobj.is_pinned(): memeobj.pin()
          except Exception:  # if a process with name '' cannot get pinned
             pass
 
-   time.sleep(1)
+   sleep(1)
    if "GooseDesktop.exe" not in (i.name() for i in psutil.process_iter()):
-      quit()  # close launcher if goose's got closed
+      sys.exit()  # close launcher if goose's got closed
