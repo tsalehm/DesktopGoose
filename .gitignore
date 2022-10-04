@@ -1,1 +1,4 @@
 /.vscode
+_test?.py
+pylauncher/build/spec/build
+pylauncher/build/spec/dist
